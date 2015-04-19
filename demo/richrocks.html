@@ -1,0 +1,20 @@
+<form role="form">
+    <fieldset>
+        <legend>Rich Rocks Radio!</legend>
+        <div class="form-group">
+            <input id="radio1" type="radio" ng-model="color.name" value="red">
+            <label for="radio1">Red</label>
+            <br/>
+            <input id="radio2" type="radio" ng-model="color.name" ng-value="specialValue">
+            <label for="radio2">Green</label>
+            <br/>
+            <input id="radio3" type="radio" ng-model="color.name" value="blue">
+            <label for="radio3">Blue</label>
+            <br/>
+        </div>
+        <tt>color = {{color.name | json}}</tt>
+        <br/>
+    </fieldset>
+</form>
+Note that `ng-value="specialValue"` sets radio item's value to be the value of `$scope.specialValue`.
+
