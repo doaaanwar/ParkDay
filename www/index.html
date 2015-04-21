@@ -70,8 +70,8 @@
                            <div><span ng-style="{'color': fontColor, 'font-size': fontSize, 'font-weight': fontWeight}" >{{result}}</span></div>
                           <br>
                           <p>Details: {{description2}}</p>
-                          <p>Temperature: {{main2.temp}}</p>
-                          <p>Wind speed: {{wind2.speed}}</p>
+                          <p>Temperature: {{main2.temp}} °C</p>
+                          <p>Wind speed: {{wind2.speed}} m/s</p>
                             <p>humidity: {{main2.humidity}}%</p>
                     </div>
                      <button ng-hide="!showLatLong || hideAll" ng-click="changeNext()" class="btn btn-primary btn-block">What about after five hours?</button>

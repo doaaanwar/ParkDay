@@ -53,7 +53,7 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
             $scope.map.center.longitude = position.coords.longitude;
             $scope.position.name = position.street;
             $scope.map.markers.length = 0;
-            var oMarker = {id:0, data: "you are here", coords: position.coords};
+            var oMarker = {id:0, data: "Park Time", coords: position.coords};
             $scope.map.markers.push(oMarker);
             $scope.$apply();
             
@@ -117,7 +117,7 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
        
         $scope.description2 = data.list[1].weather[0].description;
         $scope.icon = 'http://openweathermap.org/img/w/'+data.list[1].weather[0].icon+'.png';
-        $scope.checkSuggestion(data.list[1].weather[0].main,data.list[1].wind.speed,data.list[1].weather[0].icon);
+        $scope.checkSuggestion(data.list[1].weather[0].main,data.list[1].wind.speed,data.list[1].weather[0].icon,data.list[1].weather[0].description);
         //$scope.icon = data.list[0].weather[0].icon;
          
       }).
@@ -126,7 +126,7 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
         $log.error('Could not retrieve data from ' + url);
       });
   },
-        checkSuggestion: function(main,speed,weatherIcon){
+        checkSuggestion: function(main,speed,weatherIcon,description){
             
             if(weatherIcon.indexOf('d') != -1) {
 			        		
@@ -147,8 +147,17 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
             }
             else if(main == "Clouds")
             {
-                //TODO check the description
-                 $scope.fontColor = 'blue';
+               
+                
+                $scope.fontColor = 'orange';
+                if(timeOfDay == 'night')
+                {
+                     $scope.result= "Take care! There is " + description + " and it is night time";
+                }
+                else
+                {
+                    $scope.result= "Take care! There is " + description;
+                }
             }
             else if(main == "Clear")
             {
@@ -157,12 +166,20 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
                 if(timeOfDay == 'night')
                 {
                    $scope.fontColor = 'blue';
-                   $scope.result = 'It is night time. You can enjoy the weather and the silence!';
+                   $scope.result = 'It is night time. You can enjoy the weather and the silence or just wait till the morning!';
                 }
             }
-            else if(main == "rain")
+            else if(main == "Rain")
             {
-                $scope.fontColor = 'yellow';
+                $scope.fontColor = 'orange';
+                if(timeOfDay == 'night')
+                {
+                     $scope.result= "Take care! There is " + description + " and it is night time";
+                }
+                else
+                {
+                    $scope.result= "Take care! There is " + description;
+                }
             }
             else if(main == "Additional")
             {
@@ -171,9 +188,20 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
             else if(main == "Drizzle")
             {
                 $scope.fontColor = 'blue';
+                $scope.fontColor = 'orange';
+                if(timeOfDay == 'night')
+                {
+                     $scope.result= "It is " + description + " and night time";
+                }
+                else
+                {
+                    $scope.result= "It is " + description;
+                }
             }
-            if(speed > 5)
+            if(speed > 50)
             {
+                $scope.result = 'WARNING!! The wind speed is high.';
+                $scope.fontColor = 'red';
             }
          
             //style="color: blue;font-size: 20px;font-weight: bold"
@@ -203,6 +231,7 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
         $scope.description2 = data.list[2].weather[0].description;
         $scope.icon = 'http://openweathermap.org/img/w/'+data.list[2].weather[0].icon+'.png';
         //$scope.icon = data.list[0].weather[0].icon;
+        $scope.checkSuggestion(data.list[2].weather[0].main,data.list[2].wind.speed,data.list[2].weather[0].icon,data.list[2].weather[0].description);
          
       }).
       error(function(data, status, headers, config) {
