@@ -53,7 +53,7 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
             $scope.map.center.longitude = position.coords.longitude;
             $scope.position.name = position.street;
             $scope.map.markers.length = 0;
-            var oMarker = {id:0, data: "Park Time", coords: position.coords};
+            var oMarker = {id:0, data: "Park Day", coords: position.coords};
             $scope.map.markers.push(oMarker);
             $scope.$apply();
             
