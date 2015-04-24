@@ -97,7 +97,6 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
     // See http://openweathermap.org/API#weather.
             $scope.setCurrentPosition();
     var url = 'http://api.openweathermap.org/data/2.5/forecast';
-            //TODO should read rain, humidity, description and temp then decide on them if yes or no with description
     var $units = 'metric';
     $http.jsonp(url, { params : {
         lat : $scope.map.center.latitude,
@@ -118,7 +117,7 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
         $scope.description2 = data.list[1].weather[0].description;
         $scope.icon = 'http://openweathermap.org/img/w/'+data.list[1].weather[0].icon+'.png';
         $scope.checkSuggestion(data.list[1].weather[0].main,data.list[1].wind.speed,data.list[1].weather[0].icon,data.list[1].weather[0].description);
-        //$scope.icon = data.list[0].weather[0].icon;
+     
          
       }).
       error(function(data, status, headers, config) {
@@ -203,8 +202,6 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
                 $scope.result = 'WARNING!! The wind speed is high.';
                 $scope.fontColor = 'red';
             }
-         
-            //style="color: blue;font-size: 20px;font-weight: bold"
           
             $scope.fontWeight = 'bold';
             $scope.fontSize = '20px';
@@ -230,7 +227,6 @@ app.controller("mycontroller", function ($scope, uiGmapGoogleMapApi,$http, $log)
         $scope.wind2 = data.list[2].wind;
         $scope.description2 = data.list[2].weather[0].description;
         $scope.icon = 'http://openweathermap.org/img/w/'+data.list[2].weather[0].icon+'.png';
-        //$scope.icon = data.list[0].weather[0].icon;
         $scope.checkSuggestion(data.list[2].weather[0].main,data.list[2].wind.speed,data.list[2].weather[0].icon,data.list[2].weather[0].description);
          
       }).
